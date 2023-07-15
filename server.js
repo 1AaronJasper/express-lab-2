@@ -15,3 +15,15 @@ app.get('/greeting/:name', (req, res) => {
 app.listen(3000, () => {
     console.log('listening');
 });
+
+app.get("/tip/:total/:tipPercentage", (req, res) => {
+    const total = parseFloat(req.params.total);
+    const tipPercentage = parseFloat(req.params.tipPercentage);
+    if (isNaN(total) || isNaN(tipPercentage)) {
+      res.status(400).send("Invalid parameters");
+      return;
+    }
+    const tipAmount = (total * tipPercentage) / 100;
+    res.send(tipAmount.toString());
+  });
+  
